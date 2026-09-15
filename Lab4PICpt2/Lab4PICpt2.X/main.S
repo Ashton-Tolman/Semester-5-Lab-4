@@ -1,6 +1,6 @@
 // Ashton Tolman
 // RCET3373
-// Lab4PICpt1
+// Lab4PICpt2
 // https://github.com/Ashton-Tolman/Semester-5-Lab-4.git
 // linker code:-Wl,-presetVect=0000h,-pcode=0008h
 
@@ -27,8 +27,10 @@
 // config statements should precede project file includes.
 #include <xc.inc>
 
-count    EQU 0x20   ;use data memory address 0x20 as an 8-bit loop counter  
-    
+outCount    EQU 0x20	;use data memory address 0x20 as an 8-bit loop counter 
+inCount	    EQU 0x21	;use data memory address 0x21 as an 8-bit loop counter
+tableAddress EQU 0x22   ;use data memory address 0x21 as a location for lookup 
+
 ; Reset Vector at 000h. Execution starts here after reset 
 PSECT resetVect,class=CODE,delta=2
 ResetVector:
@@ -67,28 +69,133 @@ Setup:
     
 
 Main:
-    BTFSS PORTB,0
-    goto NoButton
+    // main goes here
+    CALL TestDIP	    ;
     
+    BTFSC tableAddress, 7   ;
+    goto Main		    ;
     
-DelayLoop:
-    MOVLW 0x01      ;1 TCY code not part of delay
-    XORWF 0x05,1    ;1 TCY code not part of delay
-    
-    MOVLW 0xA3      ;1 TCY delay overhead
-    MOVWF count     ;1 TCY delay overhead
+    CALL LookupTable
+    MOVWF outCount
     
     CALL Delay
     
+    MOVLW 0x01	    ;Put a 1 in W
+    XORWF PORTA,1   ;Toggle PortA
+    
     goto Main
-Delay:                     
-    DECFSZ count,1  ;1(2) 1 TCY if not zero, 2 TCY if zero
-    goto Delay	    ;2 TCY
-
+    
+TestDIP:
+    Test7:
+    BTFSS 0x06,7    ;Skip next instruction if RB7 is high
+    goto Test6      ;If RB7 low move to next bit
+    goto SetAddress7;If RB7 high display 7
+	
+    Test6:
+    BTFSS 0x06,6    ;Skip next instruction if RB6 is high
+    goto Test5      ;If RB6 low move to next bit
+    goto SetAddress6;If RB6 high display 6
+	
+    Test5:
+    BTFSS 0x06,5    ;Skip next instruction if RB5 is high
+    goto Test4      ;If RB5 low move to next bit
+    goto SetAddress5;If RB5 high display 5
+	
+    Test4:
+    BTFSS 0x06,4    ;Skip next instruction if RB4 is high 
+    goto Test3      ;If RB4 low move to next bit
+    goto SetAddress4;If RB4 high display 4
+	
+    Test3:
+    BTFSS 0x06,3    ;Skip next instruction if RB3 is high 
+    goto Test2      ;If RB3 low move to next bit
+    goto SetAddress3;If RB3 high display 3
+	
+    Test2:
+    BTFSS 0x06,2    ;Skip next instruction if RB2 is high
+    goto Test1      ;If RB2 low move to next bit
+    goto SetAddress2;If RB2 high display 2
+	
+    Test1:
+    BTFSS 0x06,1    ;Skip next instruction if RB1 is high 
+    goto Test0      ;If RB1 low move to next bit
+    goto SetAddress1;If RB1 high display 1
+	
+    Test0:
+    BTFSS 0x06,0    ;Skip next instruction if RB0 is high
+    goto NoNoise    ;If RB0 is low, display $
+    goto SetAddress0;If RB0 high display 0
+	
+    SetAddress7:
+    MOVLW 0x01		;Select the character set for display 7
+    MOVWF tableAddress	;Send W to PortC
     RETURN
-   
-NoButton:
-    MOVLW 0x00
-    MOVWF 0x05
-    goto Main
+	
+    SetAddress6:
+    MOVLW 0x02		;Select the character set for display 6
+    MOVWF tableAddress  ;Send W to PortC
+    RETURN
+	
+    SetAddress5:
+    MOVLW 0x03		;Select the character set for display 5
+    MOVWF tableAddress	;Send W to PortC
+    RETURN
+	
+    SetAddress4:
+    MOVLW 0x04		;Select the character set for display 4
+    MOVWF tableAddress	;Send W to PortC
+    RETURN
+	
+    SetAddress3:
+    MOVLW 0x05		;Select the character set for display 3
+    MOVWF tableAddress	;Send W to PortC
+    RETURN
+	
+    SetAddress2:
+    MOVLW 0x06		;Select the character set for display 2
+    MOVWF tableAddress	;Send W to PortC
+    RETURN
+	
+    SetAddress1:    
+    MOVLW 0x07		;Select the character set for display 1
+    MOVWF tableAddress	;Send W to PortC
+    RETURN
+	
+    SetAddress0:
+    MOVLW 0x08		;Select the character set for display 0
+    MOVWF tableAddress	;Send W to PortC
+    RETURN
+	
+    NoNoise:
+    MOVLW 0x80		;Select the character set for display $
+    MOVWF tableAddress	;Send W to PortC
+    RETURN
+    
+LookupTable:
+    MOVF tableAddress, 0    ;
+    ADDWF PCL, 1	    ;
+    
+    NOP
+    RETLW 0x77
+    RETLW 0x7E
+    RETLW 0x8E
+    RETLW 0x9F
+    RETLW 0xB2
+    RETLW 0xBD
+    RETLW 0xD4
+    RETLW 0xEE
+    
+Delay:
+    OutDelay:
+    MOVLW 0x0E
+    MOVWF inCount
+    
+    InDelay:
+    DECFSZ inCount
+    goto InDelay
+    
+    DECFSZ outCount
+    goto OutDelay
+    
+    RETURN
 End
