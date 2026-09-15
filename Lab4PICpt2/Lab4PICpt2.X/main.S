@@ -70,15 +70,15 @@ Setup:
 
 Main:
     // main goes here
-    CALL TestDIP	    ;
+    CALL TestDIP	    ;2 TCY Goes to testing dip status
     
-    BTFSC tableAddress, 7   ;
-    goto Main		    ;
+    BTFSC tableAddress, 7   ;1 (2) 2 TCY if it is 0 it skips 
+    goto Main		    ;2 TCY
     
-    CALL LookupTable
-    MOVWF outCount
+    CALL LookupTable	    ;2 TCY Goes to get the address from the lookupTable
+    MOVWF outCount	    ;1 TCY puts the address into the outerloop count
     
-    CALL Delay
+    CALL Delay		    ;2 TCY Goes to delay
     
     MOVLW 0x01	    ;Put a 1 in W
     XORWF PORTA,1   ;Toggle PortA
@@ -172,30 +172,30 @@ TestDIP:
     RETURN
     
 LookupTable:
-    MOVF tableAddress, 0    ;
-    ADDWF PCL, 1	    ;
+    MOVF tableAddress, 0    ;1 TCY put known address into W
+    ADDWF PCL, 1	    ;2 TCY Add known W with the Programm Counter
     
     NOP
-    RETLW 0x77
-    RETLW 0x7E
-    RETLW 0x8E
-    RETLW 0x9F
-    RETLW 0xB2
-    RETLW 0xBD
-    RETLW 0xD4
-    RETLW 0xEE
+    RETLW 0x77		    ;2 TCY selects 261.63Hz
+    RETLW 0x7E		    ;2 TCY selects 246.94Hz
+    RETLW 0x8E		    ;2 TCY selects 220.00Hz
+    RETLW 0x9F		    ;2 TCY selects 196.00Hz
+    RETLW 0xB2		    ;2 TCY selects 174.61Hz
+    RETLW 0xBD		    ;2 TCY selects 164.81Hz
+    RETLW 0xD4		    ;2 TCY selects 146.83Hz
+    RETLW 0xEE		    ;2 TCY selects 130.81Hz
     
 Delay:
     OutDelay:
-    MOVLW 0x0A
-    MOVWF inCount
+    MOVLW 0x0A		    ;1 TCY
+    MOVWF inCount	    ;1 TCY
     
     InDelay:
-    DECFSZ inCount
-    goto InDelay
+    DECFSZ inCount	    ;1(2) TCY
+    goto InDelay	    ;2 TCY
     
-    DECFSZ outCount
-    goto OutDelay
+    DECFSZ outCount	    ;1(2) TCY
+    goto OutDelay	    ;2 TCY
     
-    RETURN
+    RETURN		    ;2 TCY
 End
