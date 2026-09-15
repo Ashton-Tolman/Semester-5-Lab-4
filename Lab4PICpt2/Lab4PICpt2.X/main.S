@@ -67,8 +67,8 @@ Setup:
     
 
 Main:
-    BTFSS PORTB,0   ;Test RB0 and skip next instruction if it is high
-    goto NoButton   ;goto the instruction to clear PortA
+    BTFSS PORTB,0
+    goto NoButton
     
     
 DelayLoop:
@@ -78,17 +78,17 @@ DelayLoop:
     MOVLW 0xA3      ;1 TCY delay overhead
     MOVWF count     ;1 TCY delay overhead
     
-    CALL Delay	    ;Calling the delay loop to play the 1kHz freq
+    CALL Delay
     
-    goto Main	    ;goto main loop
+    goto Main
 Delay:                     
     DECFSZ count,1  ;1(2) 1 TCY if not zero, 2 TCY if zero
     goto Delay	    ;2 TCY
 
-    RETURN	    ;Goes to the PC of the call +1
+    RETURN
    
 NoButton:
-    MOVLW 0x00	    ;Add 0's in W
-    MOVWF 0x05	    ;Make PortA output nothing
-    goto Main	    ;goto main loop
+    MOVLW 0x00
+    MOVWF 0x05
+    goto Main
 End
