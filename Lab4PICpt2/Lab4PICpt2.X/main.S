@@ -127,47 +127,47 @@ TestDIP:
     goto SetAddress0;If RB0 high display 0
 	
     SetAddress7:
-    MOVLW 0x01		;Select the character set for display 7
+    MOVLW 0x01		;Select the address for freq 1
     MOVWF tableAddress	;Send W to PortC
     RETURN
 	
     SetAddress6:
-    MOVLW 0x02		;Select the character set for display 6
+    MOVLW 0x02		;Select the address for freq 2
     MOVWF tableAddress  ;Send W to PortC
     RETURN
 	
     SetAddress5:
-    MOVLW 0x03		;Select the character set for display 5
+    MOVLW 0x03		;Select the address for freq 3
     MOVWF tableAddress	;Send W to PortC
     RETURN
 	
     SetAddress4:
-    MOVLW 0x04		;Select the character set for display 4
+    MOVLW 0x04		;Select the address for freq 4
     MOVWF tableAddress	;Send W to PortC
     RETURN
 	
     SetAddress3:
-    MOVLW 0x05		;Select the character set for display 3
+    MOVLW 0x05		;Select the address for freq 5
     MOVWF tableAddress	;Send W to PortC
     RETURN
 	
     SetAddress2:
-    MOVLW 0x06		;Select the character set for display 2
+    MOVLW 0x06		;Select the address for freq 6
     MOVWF tableAddress	;Send W to PortC
     RETURN
 	
     SetAddress1:    
-    MOVLW 0x07		;Select the character set for display 1
+    MOVLW 0x07		;Select the address for freq 7
     MOVWF tableAddress	;Send W to PortC
     RETURN
 	
     SetAddress0:
-    MOVLW 0x08		;Select the character set for display 0
+    MOVLW 0x08		;Select the address for freq 8
     MOVWF tableAddress	;Send W to PortC
     RETURN
 	
     NoNoise:
-    MOVLW 0x80		;Select the character set for display $
+    MOVLW 0x80		;Select the no noise condition
     MOVWF tableAddress	;Send W to PortC
     RETURN
     
