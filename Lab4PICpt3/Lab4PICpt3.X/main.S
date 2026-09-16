@@ -249,87 +249,87 @@ Test4x4:
 	GOTO SetAddress1    ;If RB7 low make tableAddress 1
 	
     SetAddress1:
-	MOVLW 0x00
-	MOVWF tableAddress
+	MOVLW 0x00	    ; Select address for freq 1
+	MOVWF tableAddress  ; Send W to table Address
 	RETURN
 	
     SetAddress2:
-	MOVLW 0x01
-	MOVWF tableAddress
+	MOVLW 0x01	    ; Select address for freq 2
+	MOVWF tableAddress  ; Send W to table Address
 	RETURN
 	
     SetAddress3:
-	MOVLW 0x02
-	MOVWF tableAddress
+	MOVLW 0x02	    ; Select address for freq 3
+	MOVWF tableAddress  ; Send W to table Address
 	RETURN
 	
     SetAddress4:
-	MOVLW 0x03
-	MOVWF tableAddress
+	MOVLW 0x03	    ; Select address for freq 4
+	MOVWF tableAddress  ; Send W to table Address
 	RETURN
 	
     SetAddress5:
-	MOVLW 0x04
-	MOVWF tableAddress
+	MOVLW 0x04	    ; Select address for freq 5
+	MOVWF tableAddress  ; Send W to table Address
 	RETURN
 	
     SetAddress6:
-	MOVLW 0x05
-	MOVWF tableAddress
+	MOVLW 0x05	    ; Select address for freq 6
+	MOVWF tableAddress  ; Send W to table Address
 	RETURN
 	
     SetAddress7:
-	MOVLW 0x06
-	MOVWF tableAddress
+	MOVLW 0x06	    ; Select address for freq 7
+	MOVWF tableAddress  ; Send W to table Address
 	RETURN
 	
     SetAddress8:
-	MOVLW 0x07
-	MOVWF tableAddress
+	MOVLW 0x07	    ; Select address for freq 8
+	MOVWF tableAddress  ; Send W to table Address
 	RETURN
 	
     SetAddress9:
-	MOVLW 0x08
-	MOVWF tableAddress
+	MOVLW 0x08	    ; Select address for freq 9
+	MOVWF tableAddress  ; Send W to table Address
 	RETURN
 	
     SetAddress10:
-	MOVLW 0x09
-	MOVWF tableAddress
+	MOVLW 0x09	    ; Select address for freq 10
+	MOVWF tableAddress  ; Send W to table Address
 	RETURN
 	
     SetAddress11:
-	MOVLW 0x0A
-	MOVWF tableAddress
+	MOVLW 0x0A	    ; Select address for freq 11
+	MOVWF tableAddress  ; Send W to table Address
 	RETURN
 	
     SetAddress12:
-	MOVLW 0x0B
-	MOVWF tableAddress
+	MOVLW 0x0B	    ; Select address for freq 12
+	MOVWF tableAddress  ; Send W to table Address
 	RETURN
 	
     SetAddress13:
-	MOVLW 0x0C
-	MOVWF tableAddress
+	MOVLW 0x0C	    ; Select address for freq 13
+	MOVWF tableAddress  ; Send W to table Address
 	RETURN
 	
     SetAddress14:
-	MOVLW 0x0D
-	MOVWF tableAddress
+	MOVLW 0x0D	    ; Select address for freq 14
+	MOVWF tableAddress  ; Send W to table Address
 	RETURN
 	
     SetAddress15:
-	MOVLW 0x0E
-	MOVWF tableAddress
+	MOVLW 0x0E	    ; Select address for freq 15
+	MOVWF tableAddress  ; Send W to table Address
 	RETURN
 	
     SetAddress16:
-	MOVLW 0x0F
-	MOVWF tableAddress
+	MOVLW 0x0F	    ; Select address for freq 16
+	MOVWF tableAddress  ; Send W to table Address
 	RETURN
 	
     NoNoise:
-	MOVLW 0x80		;Select the character set for display $
-	MOVWF tableAddress	;Send W to PortC
+	MOVLW 0x80		;Select the No noise condition
+	MOVWF tableAddress	;Send W to tableAddress
 	RETURN
 End
