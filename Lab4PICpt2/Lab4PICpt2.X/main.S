@@ -187,7 +187,7 @@ LookupTable:
     
 Delay:
     OutDelay:
-    MOVLW 0x0A		    ;1 TCY
+    MOVLW 0x04		    ;1 TCY
     MOVWF inCount	    ;1 TCY
     
     InDelay:
