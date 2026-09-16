@@ -128,47 +128,47 @@ TestDIP:
 	
     SetAddress7:
     MOVLW 0x01		;Select the address for freq 1
-    MOVWF tableAddress	;Send W to PortC
+    MOVWF tableAddress	;Send W to tableAddress
     RETURN
 	
     SetAddress6:
     MOVLW 0x02		;Select the address for freq 2
-    MOVWF tableAddress  ;Send W to PortC
+    MOVWF tableAddress  ;Send W to tableAddress
     RETURN
 	
     SetAddress5:
     MOVLW 0x03		;Select the address for freq 3
-    MOVWF tableAddress	;Send W to PortC
+    MOVWF tableAddress	;Send W to tableAddress
     RETURN
 	
     SetAddress4:
     MOVLW 0x04		;Select the address for freq 4
-    MOVWF tableAddress	;Send W to PortC
+    MOVWF tableAddress	;Send W to tableAddress
     RETURN
 	
     SetAddress3:
     MOVLW 0x05		;Select the address for freq 5
-    MOVWF tableAddress	;Send W to PortC
+    MOVWF tableAddress	;Send W to tableAddress
     RETURN
 	
     SetAddress2:
     MOVLW 0x06		;Select the address for freq 6
-    MOVWF tableAddress	;Send W to PortC
+    MOVWF tableAddress	;Send W to tableAddress
     RETURN
 	
     SetAddress1:    
     MOVLW 0x07		;Select the address for freq 7
-    MOVWF tableAddress	;Send W to PortC
+    MOVWF tableAddress	;Send W to tableAddress
     RETURN
 	
     SetAddress0:
     MOVLW 0x08		;Select the address for freq 8
-    MOVWF tableAddress	;Send W to PortC
+    MOVWF tableAddress	;Send W to tableAddress
     RETURN
 	
     NoNoise:
     MOVLW 0x80		;Select the no noise condition
-    MOVWF tableAddress	;Send W to PortC
+    MOVWF tableAddress	;Send W to tableAddress
     RETURN
     
 LookupTable:
