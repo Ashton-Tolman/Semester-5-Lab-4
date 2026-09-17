@@ -125,7 +125,6 @@ Delay:
     RETURN		    ;2 TCY
     
 Test4x4:
-    // main goes here
     ScanRow1:
     BCF 0x03, 6		;
     BSF 0x03, 5		; Set bank 1 active
